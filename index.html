@@ -50,7 +50,10 @@
       <h3>{{.Name}}</h3>
       <p>First Year of Activity: {{.FirstAlbum}}</p>
       <p>Date of First Activity: {{.CreationDate}}</p>
-      <a href="#">Members</a>
+      <h4>Members</h4>
+      {{range .Members}}
+      <p>{{.}}</p>
+      {{end}}
     </div>
     {{end}}
   </body>

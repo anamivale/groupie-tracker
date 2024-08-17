@@ -57,3 +57,33 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 }
 
 // Handler for the locations page
+func LocationHandler(w http.ResponseWriter, r *http.Request) {
+	// Get the artist ID from the query parameters
+	artistID := r.URL.Query().Get("id")
+	url := "https://groupietrackers.herokuapp.com/api/locations/" + artistID
+
+	// Make the GET request
+	resp, err := http.Get(url)
+	if err != nil {
+		log.Fatalf("Failed to make request: %v", err)
+	}
+	defer resp.Body.Close()
+
+	// Read the response body
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalf("Failed to read response: %v", err)
+	}
+
+	// Parse the JSON response into the struct
+	var locationResponse LocationResponse
+	err = json.Unmarshal(body, &locationResponse)
+	if err != nil {
+		log.Fatalf("Failed to parse JSON: %v", err)
+	}
+
+	// Render the locations template
+	temp, _ := template.ParseFiles("location.html")
+	temp.Execute(w, locationResponse.Locations)
+}
+

@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strings"
 	"text/template"
 )
 
@@ -87,3 +88,33 @@ func LocationHandler(w http.ResponseWriter, r *http.Request) {
 	temp.Execute(w, locationResponse.Locations)
 }
 
+func HandleDates(w http.ResponseWriter, r *http.Request){
+
+	Id := r.URL.Query().Get("id")
+	url := "https://groupietrackers.herokuapp.com/api/dates/" + Id
+	res, err := http.Get(url)
+
+	if err !=nil{
+		log.Fatalf("Failed to make request: %v", err)
+
+	}
+	defer res.Body.Close()
+
+	body, err := io.ReadAll(res.Body)
+
+	if err != nil {
+		log.Fatalf("Failed to read response: %v", err)
+	}
+
+	var dates Dates
+	err = json.Unmarshal(body, &dates)
+	for i, s := range dates.Date {
+        dates.Date[i] = strings.ReplaceAll(s, "*", "")
+    }
+	if err != nil {
+		log.Fatalf("Failed to parse JSON: %v", err)
+	}
+
+	temp, _ := template.ParseFiles("date.html")
+	temp.Execute(w, dates.Date)
+}

@@ -11,6 +11,7 @@ func main() {
 	http.HandleFunc("/", handlers.Handler)
 	http.HandleFunc("/location", handlers.LocationHandler)
 	http.HandleFunc("/dates", handlers.HandleDates)
+	http.HandleFunc("/relations", handlers.HandleRelation)
 	http.ListenAndServe(":3000", nil)
 	
 }

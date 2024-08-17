@@ -118,3 +118,37 @@ func HandleDates(w http.ResponseWriter, r *http.Request){
 	temp, _ := template.ParseFiles("date.html")
 	temp.Execute(w, dates.Date)
 }
+
+func HandleRelation(w http.ResponseWriter, r *http.Request)  {
+	Id :=  r.URL.Query().Get("id")
+
+	url := "https://groupietrackers.herokuapp.com/api/relation/"+Id
+
+	res, err := http.Get(url)
+	if err != nil {
+		log.Fatalf("Fail to get: %v", err.Error())
+	}
+	defer res.Body.Close()
+	body, err := io.ReadAll(res.Body)
+
+	if err != nil {
+		log.Fatalf("Fail to read: %v", err.Error())
+	}
+	var relation Relation
+
+	err = json.Unmarshal(body, &relation)
+
+	if err != nil {
+		log.Fatalf("Fail to unmarshal: %v", err.Error())
+	}
+
+	temp, err  := template.ParseFiles("relation.html")
+	if err != nil {
+		log.Fatalf("Fail to parse file: %v", err.Error())
+	}
+	err = temp.Execute(w, relation)
+	if err != nil {
+		log.Fatalf("Fail to execute file: %v", err.Error())
+	}
+	
+}

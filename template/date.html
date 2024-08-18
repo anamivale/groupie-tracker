@@ -1,91 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dates</title>
-    <style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concert Dates</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #f8f8f8;
+      background-color: rgb(27, 27, 70);
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #1cbcd1;
+    }
+
+    ol {
+      width: 100%;
+      max-width: 40vw;
+      padding: 20px;
+      margin: 0;
+      list-style-type: none;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      color: #333;
+    }
+
+    li {
+      padding: 15px 20px;
+      font-size: 1.1rem;
+      border-bottom: 1px solid #ddd;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    a {
+      margin-top: 30px;
+      padding: 12px 24px;
+      background-color: #4a90e2;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+    }
+
+    a:hover {
+      background-color: #357abd;
+    }
+
+    @media (max-width: 600px) {
       body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: white;
-        background-color: rgb(27, 27, 70);
+        padding: 15px;
       }
 
       h2 {
-        text-align: center;
-        margin-bottom: 20px;
+        font-size: 1.6rem;
       }
 
       ol {
-        width: 100%;
-        max-width: 30vw;
-        padding-left: 30px;
-        color: black;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        max-width: 90vw;
+        padding: 15px;
       }
 
       li {
-        padding: 10px;
         font-size: 1rem;
-        border-bottom: 1px solid #ccc;
-      }
-
-      li:last-child {
-        border-bottom: none;
+        padding: 12px 15px;
       }
 
       a {
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: #6694ba; /* Secondary color */
-        color: #fff;
-        text-decoration: none;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        text-align: center;
+        padding: 14px;
       }
-
-      a:hover {
-        background-color: #053363;
-      }
-
-      @media (max-width: 600px) {
-        body {
-          padding: 10px;
-        }
-
-        h2 {
-          font-size: 1.5rem;
-        }
-
-        li {
-          font-size: 0.9rem;
-        }
-
-        ol {
-          padding-left: 25px;
-        }
-
-        a {
-          width: 100%;
-          text-align: center;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <h2>Last and/or upcoming concert dates.</h2>
-    <ol>
-      {{range .}}
-      <p>{{.}}</p>
-      {{end}}
-    </ol>
-    <a href="/">Back to Artists</a>
-  </body>
+    }
+  </style>
+</head>
+<body>
+  <h2>Last and/or Upcoming Concert Dates</h2>
+  <ol>
+    {{range .}}
+    <li>{{.}}</li>
+    {{end}}
+  </ol>
+  <a href="/">Back to Artists</a>
+</body>
 </html>

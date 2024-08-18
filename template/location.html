@@ -1,87 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Concert Locations</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: rgb(27, 27, 70);
-        color: white;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concert Locations</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(27, 27, 70, 0.9), rgba(0, 0, 0, 0.6));
+      color: #f0f0f0;
+    }
 
-      h2 {
-        margin-top: 20px;
-        /* color: #00468c; */
+    h2 {
+      font-size: 2rem;
+      margin-top: 20px;
+      color: #00bcd4;
+      font-weight: 500;
+    }
+
+    ol {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+      max-width: 600px;
+      margin: 20px auto;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      color: #333;
+    }
+
+    li {
+      padding: 15px 20px;
+      border-bottom: 1px solid #ddd;
+      font-size: 1.2rem;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    a {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #00bcd4;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    a:hover {
+      background-color: #018d9c;
+      transform: scale(1.05);
+    }
+
+    @media screen and (max-width: 600px) {
+      body {
+        padding: 10px;
       }
 
       ol {
-        list-style-type: decimal;
-        padding-left: 20px;
-        width: 50%;
-        color: black;
-        max-width: 40vw;
-        margin: 20px auto;
-        background: #ffffff;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 35px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 100%;
+        padding: 20px;
       }
 
       li {
-        margin: 10px 0;
-        font-size: 1.1em;
+        font-size: 1rem;
       }
 
-      a {
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: #6694ba; /* Secondary color */
-        color: #fff;
-        text-decoration: none;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      h2 {
+        font-size: 1.5rem;
+        text-align: center;
       }
-
-      a:hover {
-        background-color: #053363;
-      }
-
-      @media screen and (max-width: 600px) {
-        body {
-          padding: 10px;
-        }
-
-        ol {
-          width: 100%;
-          padding: 30px;
-        }
-
-        li {
-          font-size: 1em;
-        }
-
-        h2 {
-          font-size: 1.5em;
-          text-align: center;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <h2>Last and/or Upcoming Concert Locations</h2>
-    <ol>
-      {{range .}}
-      <p>{{.}}</p>
-      {{end}}
-    </ol>
-    <a href="/">Back to Artists</a>
-  </body>
+    }
+  </style>
+</head>
+<body>
+  <h2>Last and/or Upcoming Concert Locations</h2>
+  <ol>
+    {{range .}}
+    <li>{{.}}</li>
+    {{end}}
+  </ol>
+  <a href="/">Back to Artists</a>
+</body>
 </html>

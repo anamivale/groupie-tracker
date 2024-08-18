@@ -53,7 +53,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		log.Fatalf("Failed to parse JSON: %v", err)
 	}
 
-	temp, _ := template.ParseFiles("index.html")
+	temp, _ := template.ParseFiles("template/index.html")
 	temp.Execute(w, artists)
 }
 
@@ -84,7 +84,7 @@ func LocationHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Render the locations template
-	temp, _ := template.ParseFiles("location.html")
+	temp, _ := template.ParseFiles("template/location.html")
 	temp.Execute(w, locationResponse.Locations)
 }
 
@@ -115,7 +115,7 @@ func HandleDates(w http.ResponseWriter, r *http.Request){
 		log.Fatalf("Failed to parse JSON: %v", err)
 	}
 
-	temp, _ := template.ParseFiles("date.html")
+	temp, _ := template.ParseFiles("template/date.html")
 	temp.Execute(w, dates.Date)
 }
 
@@ -142,7 +142,7 @@ func HandleRelation(w http.ResponseWriter, r *http.Request)  {
 		log.Fatalf("Fail to unmarshal: %v", err.Error())
 	}
 
-	temp, err  := template.ParseFiles("relation.html")
+	temp, err  := template.ParseFiles("teplate/relation.html")
 	if err != nil {
 		log.Fatalf("Fail to parse file: %v", err.Error())
 	}

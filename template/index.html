@@ -1,104 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Groupie-Tracker</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        background-color: rgb(27, 27, 70);
-        color: white;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .container {
-        width: 40%; /* Increased width to accommodate side-by-side divs */
-        border: 1px solid #ccc;
-        margin: 10px;
-        padding: 10px;
-        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: row; /* Align child elements side by side */
-        justify-content: space-between; /* Space between the left and right divs */
-      }
-
-      .left img {
-        width: 100px;
-        height: 100px;
-        margin-bottom: 10px;
-      }
-
-      .left a {
-        display: block;
-        margin: 5px 0;
-        color: #007bff;
-        text-decoration: none;
-      }
-
-      .left a:hover {
-        text-decoration: underline;
-      }
-
-      .right h4 {
-        margin-top: 0;
-      }
-
-      .right p {
-        text-align: left; /* Left-align text in the right div */
-      }
-
-      @media screen and (max-width: 1200px) {
-        .container {
-          width: 80%; /* Adjust width for smaller screens */
-          /* flex-direction: column;  */
-          align-items: center;
-        }
-
-        .left,
-        .right {
-          width: 100%; /* Full width for each div */
-        }
-      }
-
-      @media screen and (max-width: 600px) {
         body {
-          display: flex;
-          flex-direction: column;
+            font-family: Arial, sans-serif;
+            display: flex;
+            background-color: rgb(27, 27, 70);
+            color: white;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
         }
 
+        .header {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            font-size: 10em;
+            font-weight: bold;
+            color: #4715ce;
+            overflow: hidden; /* Ensure text doesn't overflow */
+            font-family: cursive;
+        }
+
+        .header span {
+            display: inline-block;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .header span:nth-child(1) { animation-delay: 0.1s; }
+        .header span:nth-child(2) { animation-delay: 0.2s; }
+        .header span:nth-child(3) { animation-delay: 0.3s; }
+        .header span:nth-child(4) { animation-delay: 0.4s; }
+        /* Continue for as many letters as needed */
+
         .container {
-          width: 90%;
-          align-items: center;
+            width: 40%; /* Increased width to accommodate side-by-side divs */
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: row; /* Align child elements side by side */
+            justify-content: space-between; /* Space between the left and right divs */
         }
-        .right {
-          margin-left: 30px;
+
+        .left img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
         }
-      }
+
+        .left a {
+            display: block;
+            margin: 5px 0;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .left a:hover {
+            text-decoration: underline;
+        }
+
+        .right h4 {
+            margin-top: 0;
+        }
+
+        .right p {
+            text-align: left; /* Left-align text in the right div */
+        }
+
+        @media screen and (max-width: 1200px) {
+            .container {
+                width: 80%; /* Adjust width for smaller screens */
+                align-items: center;
+            }
+
+            .left,
+            .right {
+                width: 100%; /* Full width for each div */
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            body {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .container {
+                width: 90%;
+                align-items: center;
+            }
+            .right {
+                margin-left: 30px;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
+    <div class="header">Groupie-Tracker</div>
     {{range .}}
     <div class="container">
-      <div class="left">
-        <img src="{{.Image}}" alt="Image" />
-        <h3>{{.Name}}</h3>
-        <p>First Year of Activity: {{.FirstAlbum}}</p>
-        <p>Date of Band Creation: {{.CreationDate}}</p>
-        <a href="/location?id={{.ID}}">Locations</a>
-        <a href="/dates?id={{.ID}}">Dates</a>
-        <a href="/relations?id={{.ID}}">Concert locations and dates</a>
-      </div>
+        <div class="left">
+            <img src="{{.Image}}" alt="Image" />
+            <h3>{{.Name}}</h3>
+            <p>First Year of Activity: {{.FirstAlbum}}</p>
+            <p>Date of Band Creation: {{.CreationDate}}</p>
+            <a href="/location?id={{.ID}}">Locations</a>
+            <a href="/dates?id={{.ID}}">Dates</a>
+            <a href="/relations?id={{.ID}}">Concert locations and dates</a>
+        </div>
 
-      <div class="right">
-        <h4>Members</h4>
-        {{range .Members}}
-        <p>{{.}}</p>
-        {{end}}
-      </div>
+        <div class="right">
+            <h4>Members</h4>
+            {{range .Members}}
+            <p>{{.}}</p>
+            {{end}}
+        </div>
     </div>
     {{end}}
-  </body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.querySelector('.header');
+            const text = header.textContent;
+            header.innerHTML = text.split('').map((char, index) =>
+                `<span style="animation-delay:${0.1 * index}s">${char}</span>`
+            ).join('');
+        });
+    </script>
+</body>
 </html>

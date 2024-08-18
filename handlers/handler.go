@@ -142,7 +142,7 @@ func HandleRelation(w http.ResponseWriter, r *http.Request)  {
 		log.Fatalf("Fail to unmarshal: %v", err.Error())
 	}
 
-	temp, err  := template.ParseFiles("teplate/relation.html")
+	temp, err  := template.ParseFiles("template/relation.html")
 	if err != nil {
 		log.Fatalf("Fail to parse file: %v", err.Error())
 	}

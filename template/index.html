@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            background-color: rgb(27, 27, 70);
+            background : url("static/mic.jpeg") ;
             color: white;
             flex-wrap: wrap;
             justify-content: center;
@@ -183,9 +183,11 @@
             const header = document.getElementById('header');
             const text = header.textContent;
             header.innerHTML = text.split('').map((char, index) =>
-                `<span style="animation-delay:${0.1 * index}s">${char}</span>`
+                <span style="animation-delay:${0.1 * index}s">${char}</span>
             ).join('');
         });
     </script>
 </body>
 </html>
+modify that code to display only one image on the bacground and scroll the containers
+ChatGPT said:

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"groupie-tracker/handlers"
 	"net/http"
 )
@@ -12,6 +13,17 @@ func main() {
 	http.HandleFunc("/location", handlers.LocationHandler)
 	http.HandleFunc("/dates", handlers.HandleDates)
 	http.HandleFunc("/relations", handlers.HandleRelation)
-	http.ListenAndServe(":3000", nil)
+	go func() {
+        if err := http.ListenAndServe(":3000", nil); err != nil {
+            fmt.Println("Server failed:", err)
+        }
+    }()
+
+    // Your main program logic here
+    fmt.Println("Server started on port 3000")
+	fmt.Println("http://localhost:3000")
+
+    // Prevent the main function from exiting immediately
+    select {}  // This will block forever
 	
 }

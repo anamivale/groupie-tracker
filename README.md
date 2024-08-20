@@ -31,20 +31,22 @@ The main objectives of this project are:
 
     Make sure you have golang version 1.1 and above installed
     Clone the repository to your local machine.
-    ```bash
-    git clone https://learn.zone01kisumu.ke/git/vmuhembe/groupie-tracker
-    cd groupie-tracker
-    ```
+
+```bash
+   git clone https://learn.zone01kisumu.ke/git/vmuhembe/groupie-tracker
+   cd groupie-tracker
+```
 
 ## Usage
 
-    To run
-    ```bash
-        go run .
-    ```
-    To see the website, go to a web browser, then go to
-    ```bash
-    http://localhost:3000
-    ```
+To run
 
+```bash
+go run .
+```
 
+To see the website, go to a web browser, then go to
+
+```bash
+http://localhost:3000
+```

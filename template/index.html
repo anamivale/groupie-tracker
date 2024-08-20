@@ -1,193 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Groupie-Tracker</title>
     <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        background: url("static/mic.jpeg");
+        color: white;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+      }
+
+      .header {
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+        font-size: 10em;
+        font-weight: bold;
+        overflow: hidden; /* Ensure text doesn't overflow */
+        font-family: cursive;
+        background: linear-gradient(
+          45deg,
+          #ff6347,
+          #00ced1,
+          #4715ce,
+          #ff1493,
+          #32cd32
+        );
+        background-size: 400% 400%;
+        -webkit-background-clip: text; /* For WebKit-based browsers */
+        -moz-background-clip: text; /* For Firefox */
+        background-clip: text; /* For standard compliance */
+        color: transparent; /* Hide the text color so that only the gradient is visible */
+        animation: gradientAnimation 10s ease infinite;
+      }
+
+      @keyframes gradientAnimation {
+        0% {
+          background-position: 0% 0%;
+        }
+        25% {
+          background-position: 100% 0%;
+        }
+        50% {
+          background-position: 100% 100%;
+        }
+        75% {
+          background-position: 0% 100%;
+        }
+        100% {
+          background-position: 0% 0%;
+        }
+      }
+
+      .header span {
+        display: inline-block;
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(
+            20px
+          ); /* Optional: Add a slight movement effect */
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .header span:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .header span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .header span:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .header span:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      /* Add more as needed, or use a more dynamic way to set delays */
+
+      .container {
+        width: 40%;
+        border: 2px solid #ccc;
+        margin: 10px;
+        padding: 10px;
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden; /* Ensure the border animation stays within the container */
+        transition: border-color 0.5s ease, box-shadow 0.5s ease,
+          transform 0.3s ease;
+      }
+
+      .container:hover {
+        border-color: #007bff;
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.8);
+        transform: scale(1.05); /* Zoom in effect */
+      }
+
+      .left img {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 10px;
+      }
+
+      .left a {
+        display: block;
+        margin: 5px 0;
+        color: #007bff;
+        text-decoration: none;
+      }
+
+      .left a:hover {
+        text-decoration: underline;
+      }
+
+      .left h3 {
+        color: #ff6347; /* Color for h3 in the .left div */
+      }
+
+      .right h3 {
+        color: #00ced1; /* Color for h3 in the .right div */
+      }
+
+      .right h4 {
+        margin-top: 0;
+      }
+
+      .right p {
+        text-align: left; /* Left-align text in the right div */
+      }
+      footer {
+        text-align: center;
+      }
+
+      @media screen and (max-width: 1200px) {
+        .container {
+          width: 80%; /* Adjust width for smaller screens */
+          align-items: center;
+        }
+
+        .left,
+        .right {
+          width: 100%; /* Full width for each div */
+        }
+      }
+
+      @media screen and (max-width: 600px) {
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            background : url("static/mic.jpeg") ;
-            color: white;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 0;
-            padding: 0;
+          display: flex;
+          flex-direction: column;
         }
-
-        .header {
-            width: 100%;
-            text-align: center;
-            padding: 20px;
-            font-size: 10em;
-            font-weight: bold;
-            overflow: hidden; /* Ensure text doesn't overflow */
-            font-family: cursive;
-            background: linear-gradient(45deg, #ff6347, #00ced1, #4715ce, #ff1493, #32cd32);
-            background-size: 400% 400%;
-            -webkit-background-clip: text; /* For WebKit-based browsers */
-            -moz-background-clip: text; /* For Firefox */
-            background-clip: text; /* For standard compliance */
-            color: transparent; /* Hide the text color so that only the gradient is visible */
-            animation: gradientAnimation 10s ease infinite;
-        }
-
-        @keyframes gradientAnimation {
-            0% {
-                background-position: 0% 0%;
-            }
-            25% {
-                background-position: 100% 0%;
-            }
-            50% {
-                background-position: 100% 100%;
-            }
-            75% {
-                background-position: 0% 100%;
-            }
-            100% {
-                background-position: 0% 0%;
-            }
-        }
-
-        .header span {
-            display: inline-block;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px); /* Optional: Add a slight movement effect */
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .header span:nth-child(1) { animation-delay: 0.1s; }
-        .header span:nth-child(2) { animation-delay: 0.2s; }
-        .header span:nth-child(3) { animation-delay: 0.3s; }
-        .header span:nth-child(4) { animation-delay: 0.4s; }
-        /* Add more as needed, or use a more dynamic way to set delays */
 
         .container {
-            width: 40%;
-            border: 2px solid #ccc;
-            margin: 10px;
-            padding: 10px;
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            position: relative;
-            overflow: hidden; /* Ensure the border animation stays within the container */
-            transition: border-color 0.5s ease, box-shadow 0.5s ease, transform 0.3s ease;
+          width: 90%;
+          align-items: center;
         }
-
-        .container:hover {
-            border-color: #007bff;
-            box-shadow: 0 0 15px rgba(0, 123, 255, 0.8);
-            transform: scale(1.05); /* Zoom in effect */
+        .right {
+          margin-left: 30px;
         }
-
-        .left img {
-            width: 150px;
-            height: 150px;
-            margin-bottom: 10px;
-        }
-
-        .left a {
-            display: block;
-            margin: 5px 0;
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .left a:hover {
-            text-decoration: underline;
-        }
-
-        .left h3 {
-            color: #ff6347; /* Color for h3 in the .left div */
-        }
-
-        .right h3 {
-            color: #00ced1; /* Color for h3 in the .right div */
-        }
-
-        .right h4 {
-            margin-top: 0;
-        }
-
-        .right p {
-            text-align: left; /* Left-align text in the right div */
-        }
-
-        @media screen and (max-width: 1200px) {
-            .container {
-                width: 80%; /* Adjust width for smaller screens */
-                align-items: center;
-            }
-
-            .left,
-            .right {
-                width: 100%; /* Full width for each div */
-            }
-        }
-
-        @media screen and (max-width: 600px) {
-            body {
-                display: flex;
-                flex-direction: column;
-            }
-
-            .container {
-                width: 90%;
-                align-items: center;
-            }
-            .right {
-                margin-left: 30px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="header" id="header">Groupie-Tracker</div>
     {{range .}}
     <div class="container">
-        <div class="left">
-            <img src="{{.Image}}" alt="Image" />
-            <h3>{{.Name}}</h3>
-            <p>First Year of Activity: {{.FirstAlbum}}</p>
-            <p>Date of Band Creation: {{.CreationDate}}</p>
-            <a href="/location?id={{.ID}}">Locations</a>
-            <a href="/dates?id={{.ID}}">Dates</a>
-            <a href="/relations?id={{.ID}}">Concert locations and dates</a>
-        </div>
+      <div class="left">
+        <img src="{{.Image}}" alt="Image" />
+        <h3>{{.Name}}</h3>
+        <p>First Year of Activity: {{.FirstAlbum}}</p>
+        <p>Date of Band Creation: {{.CreationDate}}</p>
+        <a href="/location?id={{.ID}}">Locations</a>
+        <a href="/dates?id={{.ID}}">Dates</a>
+        <a href="/relations?id={{.ID}}">Concert locations and dates</a>
+      </div>
 
-        <div class="right">
-            <h3>Members</h3>
-            {{range .Members}}
-            <p>{{.}}</p>
-            {{end}}
-        </div>
+      <div class="right">
+        <h3>Members</h3>
+        {{range .Members}}
+        <p>{{.}}</p>
+        {{end}}
+      </div>
     </div>
     {{end}}
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const header = document.getElementById('header');
-            const text = header.textContent;
-            header.innerHTML = text.split('').map((char, index) =>
-                <span style="animation-delay:${0.1 * index}s">${char}</span>
-            ).join('');
-        });
+      document.addEventListener("DOMContentLoaded", () => {
+        const header = document.getElementById("header");
+        const text = header.textContent;
+        header.innerHTML = text
+          .split("")
+          .map((char, index) => (
+            <span style="animation-delay:${0.1 * index}s">${char}</span>
+          ))
+          .join("");
+      });
     </script>
-</body>
+  </body>
+  <footer>groupie tracker</footer>
 </html>
-modify that code to display only one image on the bacground and scroll the containers
-ChatGPT said:

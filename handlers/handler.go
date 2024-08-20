@@ -37,13 +37,19 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	// Make the GET request
 	resp, err := http.Get(url)
 	if err != nil {
-		log.Fatalf("Failed to make request: %v", err)
+		// log.Fatalf("Failed to make request: %v", err)
+		StatusInternalServerError(w)
+
+		return
 	}
 	defer resp.Body.Close()
 	// Read the response body
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatalf("Failed to read response: %v", err)
+		StatusInternalServerError(w)
+		return
+
 	}
 	// Parse the JSON response into the struct
 	var artists []Artist
@@ -65,7 +71,10 @@ func LocationHandler(w http.ResponseWriter, r *http.Request) {
 	// Make the GET request
 	resp, err := http.Get(url)
 	if err != nil {
-		log.Fatalf("Failed to make request: %v", err)
+		// log.Fatalf("Failed to make request: %v", err)
+		StatusInternalServerError(w)
+		return
+
 	}
 	defer resp.Body.Close()
 
@@ -73,6 +82,9 @@ func LocationHandler(w http.ResponseWriter, r *http.Request) {
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatalf("Failed to read response: %v", err)
+		StatusInternalServerError(w)
+		return
+
 	}
 
 	// Parse the JSON response into the struct
@@ -95,6 +107,8 @@ func HandleDates(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		log.Fatalf("Failed to make request: %v", err)
+		StatusInternalServerError(w)
+		return
 
 	}
 	defer res.Body.Close()
@@ -103,6 +117,9 @@ func HandleDates(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		log.Fatalf("Failed to read response: %v", err)
+		StatusInternalServerError(w)
+		return
+
 	}
 
 	var dates Dates
@@ -126,12 +143,18 @@ func HandleRelation(w http.ResponseWriter, r *http.Request) {
 	res, err := http.Get(url)
 	if err != nil {
 		log.Fatalf("Fail to get: %v", err.Error())
+		StatusInternalServerError(w)
+		return
+
 	}
 	defer res.Body.Close()
 	body, err := io.ReadAll(res.Body)
 
 	if err != nil {
 		log.Fatalf("Fail to read: %v", err.Error())
+		StatusInternalServerError(w)
+		return
+
 	}
 	var relation Relation
 
@@ -141,7 +164,7 @@ func HandleRelation(w http.ResponseWriter, r *http.Request) {
 		log.Fatalf("Fail to unmarshal: %v", err.Error())
 	}
 
-	temp, err  := template.ParseFiles("template/relation.html")
+	temp, err := template.ParseFiles("template/relation.html")
 	if err != nil {
 		log.Fatalf("Fail to parse file: %v", err.Error())
 	}

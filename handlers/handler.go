@@ -20,17 +20,16 @@ type Artist struct {
 	ConcertDates string   `json:"concertDates"`
 	Relations    string   `json:"relations"`
 }
-type Dates struct{
-	Date  []string `json:"dates"`
+type Dates struct {
+	Date []string `json:"dates"`
 }
 
 type LocationResponse struct {
 	Locations []string `json:"locations"`
 }
 type Relation struct {
-    DatesLocation map[string][]string `json:"datesLocations"`
+	DatesLocation map[string][]string `json:"datesLocations"`
 }
-
 
 // Handler for the main page displaying artists
 func Handler(w http.ResponseWriter, r *http.Request) {
@@ -88,13 +87,13 @@ func LocationHandler(w http.ResponseWriter, r *http.Request) {
 	temp.Execute(w, locationResponse.Locations)
 }
 
-func HandleDates(w http.ResponseWriter, r *http.Request){
+func HandleDates(w http.ResponseWriter, r *http.Request) {
 
 	Id := r.URL.Query().Get("id")
 	url := "https://groupietrackers.herokuapp.com/api/dates/" + Id
 	res, err := http.Get(url)
 
-	if err !=nil{
+	if err != nil {
 		log.Fatalf("Failed to make request: %v", err)
 
 	}
@@ -109,8 +108,8 @@ func HandleDates(w http.ResponseWriter, r *http.Request){
 	var dates Dates
 	err = json.Unmarshal(body, &dates)
 	for i, s := range dates.Date {
-        dates.Date[i] = strings.ReplaceAll(s, "*", "")
-    }
+		dates.Date[i] = strings.ReplaceAll(s, "*", "")
+	}
 	if err != nil {
 		log.Fatalf("Failed to parse JSON: %v", err)
 	}
@@ -119,10 +118,10 @@ func HandleDates(w http.ResponseWriter, r *http.Request){
 	temp.Execute(w, dates.Date)
 }
 
-func HandleRelation(w http.ResponseWriter, r *http.Request)  {
-	Id :=  r.URL.Query().Get("id")
+func HandleRelation(w http.ResponseWriter, r *http.Request) {
+	Id := r.URL.Query().Get("id")
 
-	url := "https://groupietrackers.herokuapp.com/api/relation/"+Id
+	url := "https://groupietrackers.herokuapp.com/api/relation/" + Id
 
 	res, err := http.Get(url)
 	if err != nil {
@@ -150,5 +149,5 @@ func HandleRelation(w http.ResponseWriter, r *http.Request)  {
 	if err != nil {
 		log.Fatalf("Fail to execute file: %v", err.Error())
 	}
-	
+
 }

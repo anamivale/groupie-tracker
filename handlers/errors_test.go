@@ -6,14 +6,12 @@ import (
 	"testing"
 )
 
-
-
 func TestStatusInternalServerError(t *testing.T) {
 	tests := []struct {
 		name string
 	}{
 		{name: "InternalServerErrorTest"},
-		{name : "not internal"},
+		{name: "not internal"},
 	}
 
 	for _, tt := range tests {
@@ -30,8 +28,7 @@ func TestStatusInternalServerError(t *testing.T) {
 			}
 
 			// Optionally, you can also check the response body
-		
+
 		})
 	}
 }
-

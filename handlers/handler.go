@@ -33,6 +33,14 @@ type Relation struct {
 
 // Handler for the main page displaying artists
 func Handler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		Errors(w, 404)
+		return
+	}
+	if r.Method != http.MethodGet {
+		Errors(w, 405)
+		return
+	}
 	url := "https://groupietrackers.herokuapp.com/api/artists"
 	// Make the GET request
 	resp, err := http.Get(url)
@@ -64,6 +72,16 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 // Handler for the locations page
 func LocationHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/location" {
+		Errors(w, 404)
+		return
+
+	}
+	if r.Method != http.MethodGet {
+		Errors(w, 405)
+		return
+
+	}
 	// Get the artist ID from the query parameters
 	artistID := r.URL.Query().Get("id")
 	url := "https://groupietrackers.herokuapp.com/api/locations/" + artistID
@@ -100,6 +118,16 @@ func LocationHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleDates(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/dates" {
+		Errors(w, 404)
+		return
+
+	}
+	if r.Method != http.MethodGet {
+		Errors(w, 405)
+		return
+
+	}
 
 	Id := r.URL.Query().Get("id")
 	url := "https://groupietrackers.herokuapp.com/api/dates/" + Id
@@ -136,6 +164,17 @@ func HandleDates(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleRelation(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/relations" {
+		Errors(w, 404)
+		return
+
+	}
+	if r.Method != http.MethodGet {
+		Errors(w, 405)
+		return
+
+	}
+
 	Id := r.URL.Query().Get("id")
 
 	url := "https://groupietrackers.herokuapp.com/api/relation/" + Id

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concert Dates</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #e0e0e0;
+      background-color: #121212;
+      background-image: url('static/mic.jpeg'); /* Path to your background image */
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #00bcd4;
+      font-weight: 500;
+    }
+
+    ol {
+      width: 100%;
+      max-width: 50vw;
+      padding: 20px;
+      margin: 0;
+      list-style-type: none;
+      background-color: rgba(30, 30, 30, 0.8); /* Slightly transparent background */
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      color: #e0e0e0;
+      font-size: 1.1rem;
+    }
+
+    li {
+      padding: 15px 20px;
+      border-bottom: 1px solid #333;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    a {
+      margin-top: 30px;
+      padding: 12px 24px;
+      background-color: #00bcd4;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 6px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    a:hover {
+      background-color: #018d9c;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 15px;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      ol {
+        max-width: 90vw;
+        padding: 15px;
+      }
+
+      li {
+        font-size: 1rem;
+        padding: 12px 15px;
+      }
+
+      a {
+        width: 100%;
+        text-align: center;
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>Last and/or Upcoming Concert Dates</h2>
+  <ol>
+    {{range .}}
+    <li>{{.}}</li>
+    {{end}}
+  </ol>
+  <a href="/">Back to Artists</a>
+</body>
+</html>
